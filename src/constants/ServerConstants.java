@@ -210,7 +210,7 @@ public class ServerConstants {
     public static final boolean USE_PERFECT_PITCH = true;       //For lvl 30 or above, each lvlup grants player 1 perfect pitch.
 
     //Quest Configuration
-    public static final boolean USE_QUEST_RATE = true;         //Exp/Meso gained by quests uses fixed server exp/meso rate times quest rate as multiplier, instead of player rates.
+    public static final boolean USE_QUEST_RATE = false;         //Exp/Meso gained by quests uses fixed server exp/meso rate times quest rate as multiplier, instead of player rates.
 
     //Quest Points Configuration
     public static final int QUEST_POINT_REPEATABLE_INTERVAL = 24;//Minimum interval between repeatable quest completions for quest points to be awarded.
