@@ -282,3 +282,6 @@ It is not done yet, sometimes the firewalls will block connections between the L
 These rules must target "one application", "enable connections" and must target your MapleStory client (aka localhost).
 
 After all these steps, the portforwarding process should now be complete.
+
+---
+Test
