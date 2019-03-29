@@ -212,7 +212,7 @@
     </imgdir>
     <imgdir name="8">
       <string name="type" value="n"/>
-      <string name="id" value="9010002"/>
+      <string name="id" value="2100006"/>
       <int name="x" value="1828"/>
       <int name="y" value="329"/>
       <int name="mobTime" value="0"/>
@@ -328,7 +328,7 @@
     </imgdir>
     <imgdir name="21">
       <string name="type" value="n"/>
-      <string name="id" value="9201088"/>
+      <string name="id" value="2100005"/>
       <int name="x" value="2024"/>
       <int name="y" value="324"/>
       <int name="mobTime" value="0"/>
@@ -355,11 +355,11 @@
     </imgdir>
     <imgdir name="12">
       <string name="type" value="n"/>
-      <string name="id" value="9209008"/>
+      <string name="id" value="9000017"/>
       <int name="x" value="3271"/>
       <int name="y" value="180"/>
       <int name="mobTime" value="0"/>
-      <string name="limitedname" value="maple7market_egg"/>
+	  <string name="limitedname" value="Valentine"/>
       <int name="f" value="0"/>
       <int name="hide" value="0"/>
       <int name="fh" value="90"/>
@@ -437,7 +437,7 @@
     </imgdir>
     <imgdir name="26">
       <string name="type" value="n"/>
-      <string name="id" value="1022101"/>
+      <string name="id" value="9010002"/>
       <int name="x" value="1411"/>
       <int name="y" value="318"/>
       <int name="mobTime" value="0"/>
@@ -464,7 +464,7 @@
     </imgdir>
     <imgdir name="27">
       <string name="type" value="n"/>
-      <string name="id" value="9250052"/>
+      <string name="id" value="1200002"/>
       <int name="x" value="946"/>
       <int name="y" value="87"/>
       <int name="mobTime" value="0"/>
@@ -505,7 +505,7 @@
     </imgdir>
     <imgdir name="22">
       <string name="type" value="n"/>
-      <string name="id" value="9000017"/>
+      <string name="id" value="9201027"/>
       <int name="x" value="4086"/>
       <int name="y" value="118"/>
       <int name="mobTime" value="0"/>
