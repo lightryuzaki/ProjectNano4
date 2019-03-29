@@ -51,6 +51,7 @@ public class GameConstants {
     
     // used by the "goto" command for players
     public static final HashMap<String, Integer> GOTO_TOWNS = new HashMap<String, Integer>() {{
+		put("home", 209080100);
         put("southperry", 60000);
         put("amherst", 1000000);
         put("henesys", 100000000);
@@ -87,6 +88,9 @@ public class GameConstants {
         put("square", 103040000);
         put("neo", 240070000);
         put("mushking", 106020000);
+		put("skelegon", 240040511);
+		put("wolfspider", 600020300);
+		put("excavation", 101030104);
     }};
     
     // used by the "goto" command for only-GMs
