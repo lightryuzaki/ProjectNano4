@@ -318,6 +318,11 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
 		return getPlayer().getLevel();
 	}
 
+	public int getrewardpoints(){
+		return getPlayer().getRewardPoints();
+	}
+
+
         @Override
 	public void showEffect(String effect) {
 		getPlayer().getMap().broadcastMessage(MaplePacketCreator.environmentChange(effect, 3));
@@ -615,6 +620,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
                 SkillBookEntry sbe = MapleSkillbookInformationProvider.getInstance().getSkillbookAvailability(itemid);
                 return sbe != SkillBookEntry.UNAVAILABLE ? "    Obtainable through #rquestline#k." : "";
         }
+
         
         // By Drago/Dragohe4rt CPQ + WED
         public int calcAvgLvl(int map) {

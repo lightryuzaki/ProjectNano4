@@ -94,12 +94,12 @@ function jobAdv(selection){
                 cm.sendYesNo("Great job getting to level " + cm.getLevel() + ". Would you like to become a #b"+cm.getJobName(newJob)+"#k ?");
         } else {
             if (cm.getJobId() % 1000 == 0) {
-                if (cm.getLevel() >= 10) 
+                if (cm.getLevel() >= 10 && cm.getChar().getReborns() >= 1) 
                     for (var i = 1; i < 6; i++) 
                         possibleJobs.push(cm.getJobId() + 100 * i);
-                else if (cm.getLevel() >= 8)
+                else if (cm.getLevel() >= 8 && cm.getChar().getReborns() >= 1)
                     possibleJobs.push(200);
-            } else if (cm.getLevel() >= 30) {
+            } else if (cm.getLevel() >= 30 && cm.getChar().getReborns() >= 1) {
                 switch (cm.getJobId()) {
                     case 100:
                     case 200:

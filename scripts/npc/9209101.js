@@ -48,9 +48,9 @@ function action (m,t,s) {
         }
     } else if (status == 2) {
         if (sel == 100) {
-            if (cm.getrewardpoints() >= 6) {
+            if (cm.getRewardPoints() >= 6) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)){
-                cm.gainrewardpoints(-6);
+                cm.setRewardPoints(-6);
                 cm.gainItem(2340000, 5);
                 }
                 else{
@@ -62,7 +62,7 @@ function action (m,t,s) {
         } else {
             if (cm.getrewardpoints() >= points[s]) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)) {
-                    cm.gainrewardpoints(-points[s]);
+                    cm.setRewardPoints(-points[s]);
                     if (items[s] == 2049100 || items[s] == 2340000 || items[s] == 2049003) {
                         cm.gainItem(items[s], 1);
                     }
