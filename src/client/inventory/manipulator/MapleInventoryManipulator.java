@@ -679,12 +679,12 @@ public class MapleInventoryManipulator {
             } else if (ItemConstants.isWeddingRing(source.getItemId())) {
                 map.disappearingItemDrop(chr, chr, target, dropPos);
             } else if (map.getEverlast()) {
-                if (ii.isDropRestricted(target.getItemId()) || ii.isCash(target.getItemId()) || isDroppedItemRestricted(target)) {
+                if (ii.isDropRestricted(target.getItemId())) {
                     map.disappearingItemDrop(chr, chr, target, dropPos);
                 } else {
                     map.spawnItemDrop(chr, chr, target, dropPos, true, true);
                 }
-            } else if (ii.isDropRestricted(target.getItemId()) || ii.isCash(target.getItemId()) || isDroppedItemRestricted(target)) {
+            } else if (ii.isDropRestricted(target.getItemId())) {
                 map.disappearingItemDrop(chr, chr, target, dropPos);
             } else {
                 map.spawnItemDrop(chr, chr, target, dropPos, true, true);
@@ -716,12 +716,12 @@ public class MapleInventoryManipulator {
             }
             
             if (map.getEverlast()) {
-                if (ii.isDropRestricted(itemId) || ii.isCash(itemId) || isDroppedItemRestricted(source)) {
+                if (ii.isDropRestricted(itemId) ) {
                     map.disappearingItemDrop(chr, chr, source, dropPos);
                 } else {
                     map.spawnItemDrop(chr, chr, source, dropPos, true, true);
                 }
-            } else if (ii.isDropRestricted(itemId) || ii.isCash(itemId) || isDroppedItemRestricted(source)) {
+            } else if (ii.isDropRestricted(itemId)) {
                 map.disappearingItemDrop(chr, chr, source, dropPos);           
             } else {
                 map.spawnItemDrop(chr, chr, source, dropPos, true, true);
