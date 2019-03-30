@@ -259,6 +259,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                     mi.removeSlot(item.getPosition());
                     c.announce(MaplePacketCreator.putIntoCashInventory(item, c.getAccID()));
                 } else if (action == 0x1D) { //crush ring (action 28)
+                    int birthday = slea.readInt();
                     int toCharge = slea.readInt();
                     int SN = slea.readInt();
                     String recipientName = slea.readMapleAsciiString();
@@ -323,6 +324,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                     }
                     c.announce(MaplePacketCreator.showCash(c.getPlayer()));
                 } else if (action == 0x23) { //Friendship :3
+                    int birthday = slea.readInt();
                     int payment = slea.readByte();
                     slea.skip(3); //0s
                     int snID = slea.readInt();
