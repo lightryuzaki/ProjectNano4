@@ -126,12 +126,10 @@ function action(mode, type, selection) {
             }
         } else if (status == 1){
             if (cm.canHold(1302077)){
-                if (cm.getJobId() == 0) {
+                if (cm.getJobId() == 0){
                     cm.changeJobById(100);
                     cm.gainItem(1302077, 1);
-                    if (cm.getReborns() == 0) {
-                        cm.resetStats();
-                    }
+                    cm.resetStats();
                 }
                 cm.sendNext("From here on out, you are going to the Warrior path. This is not an easy job, but if you have discipline and confidence in your own body and skills, you will overcome any difficulties in your path. Go, young Warrior!");
             } else {
