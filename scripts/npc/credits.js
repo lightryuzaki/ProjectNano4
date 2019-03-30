@@ -37,8 +37,10 @@ function writeServerStaff_ProjectNano() {
         addPerson("LemonKid", "Head Developer");
         addPerson("Bobo", "Developer");
         addPerson("Lee", "Lead GM");
-        addPerson("Evol" , "GM/WZ/Web");
+        addPerson("Evol" , "HeadGM/WZ/Web");
+		addPerson("Nofyr", "GM");
         addPerson("Arya", "WZ Content Creator");
+		addPerson("Nuclear", "WZ Content Creator");
         
         setHistory(2017, 2018);
 }
