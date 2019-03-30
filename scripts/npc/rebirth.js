@@ -71,7 +71,7 @@ function action(mode, type, selection) {
         return;
     }
     if (status == 0) {
-        cm.sendOk("... I came from distant planes to assist the fight against the #rBlack Magician#k. Right now I search my master, have you seen him?");
+        cm.sendOk("Rebirth currently disabled. Update coming soon!");
         cm.dispose();
         return;
     }
