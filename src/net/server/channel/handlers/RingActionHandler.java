@@ -112,10 +112,6 @@ public final class RingActionHandler extends AbstractMaplePacketHandler {
             source.dropMessage(1, "You can't propose while holding a marriage ring!");
             source.announce(Wedding.OnMarriageResult((byte) 0));
             return;
-        } else if (target.getGender() == source.getGender()) {
-            source.dropMessage(1, "You may only propose to a " + (source.getGender() == 1 ? "male" : "female") + "!");
-            source.announce(Wedding.OnMarriageResult((byte) 0));
-            return;
         } else if (!MapleInventoryManipulator.checkSpace(c, newBoxId, 1, "")) {
             source.dropMessage(5, "You don't have a ETC slot available right now!");
             source.announce(Wedding.OnMarriageResult((byte) 0));
