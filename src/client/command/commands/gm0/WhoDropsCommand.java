@@ -21,11 +21,11 @@
 /*
    @Author: Arthur L - Refactored command content into modules
 */
-package client.command.commands.gm1;
+package client.command.commands.gm0;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import server.MapleItemInformationProvider;
 import server.life.MapleMonsterInformationProvider;
 import tools.DatabaseConnection;

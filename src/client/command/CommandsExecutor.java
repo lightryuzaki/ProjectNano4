@@ -209,6 +209,8 @@ public class CommandsExecutor {
         addCommand("goto", GotoCommand.class);
         addCommand("aranquest", AranMahaChat.class);
         addCommand("haste", HasteCommand.class);
+        addCommand("whatdropsfrom", WhatDropsFromCommand.class);
+        addCommand("whodrops",  WhoDropsCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -219,8 +221,8 @@ public class CommandsExecutor {
         
         addCommand("bosshp", 1, BossHpCommand.class);
         addCommand("mobhp", 1, MobHpCommand.class);
-        addCommand("whatdropsfrom", 1, WhatDropsFromCommand.class);
-        addCommand("whodrops", 1, WhoDropsCommand.class);
+        //addCommand("whatdropsfrom", 1, WhatDropsFromCommand.class);
+        //addCommand("whodrops", 1, WhoDropsCommand.class);
         addCommand("buffme", 1, BuffMeCommand.class);
         addCommand("goto", 1, GotoCommand.class);
         
