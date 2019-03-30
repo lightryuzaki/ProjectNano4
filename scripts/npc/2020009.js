@@ -63,11 +63,11 @@ function action(mode, type, selection){
 			cm.sendYesNo("Okay! Now, you'll be transformed into a much more powerful adventurer through me. Before doing that, though, please make sure your SP has been thoroughly used, You'll need to use up at least all of SP's gained until level 70 to make the 3rd job advancement. Oh, and since you have already chosen your path of the occupation by the 2nd job adv., you won't have to choose again for the 3rd job adv. Do you want to do it right now?");
 		else if (status == 2) {
 		    if (cm.getPlayer().getRemainingSp() > 0)
-			    if (cm.getPlayer().getRemainingSp() > (cm.getLevel() - 70) * 3) {
+			    /*if (cm.getPlayer().getRemainingSp() > (cm.getLevel() - 70) * 3) {
 				    cm.sendNext("Please, use all your SP before continuing.");
 					cm.dispose();
 					return;
-				}
+				}*/
 		    if (cm.getJobId() % 10 == 0) {
 		        cm.gainItem(4031058, -1);
 		        cm.changeJobById(cm.getJobId() + 1);
