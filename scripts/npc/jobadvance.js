@@ -90,8 +90,11 @@ function jobAdv(selection){
             if ((secondJob && cm.getLevel() < 70) || (!secondJob && cm.getLevel() < 120)) {
                 cm.sendOk("Hey, how's it going? I've been doing well here.");
                 cm.dispose();
-            } else
+            } else if (cm.getChar().getReborns() >= 1) {
                 cm.sendYesNo("Great job getting to level " + cm.getLevel() + ". Would you like to become a #b"+cm.getJobName(newJob)+"#k ?");
+            } else {
+                cm.sendOk("I can only job advance you if you have rebirthed. Come and see me again after that.")
+            }
         } else {
             if (cm.getJobId() % 1000 == 0) {
                 if (cm.getLevel() >= 10 && cm.getChar().getReborns() >= 1) 
