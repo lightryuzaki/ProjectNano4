@@ -34,7 +34,7 @@ function start() {
     action(1, 0, 0);
 }
 
-function action(mode, type, selection) {
+/*function action(mode, type, selection) {
     if (mode == 1) {
         status++;
     } else {
@@ -62,6 +62,18 @@ function action(mode, type, selection) {
         cm.sendOk("You have now been reborn. That's a total of #r" + cm.getChar().getReborns() + "#k rebirths");
         cm.dispose();
     }
-
+*/
+function action(mode, type, selection) {
+    if (mode == 1) {
+        status++;
+    } else {
+        cm.dispose();
+        return;
+    }
+    if (status == 0) {
+        cm.sendOk("... I came from distant planes to assist the fight against the #rBlack Magician#k. Right now I search my master, have you seen him?");
+        cm.dispose();
+        return;
+    }
 
 }

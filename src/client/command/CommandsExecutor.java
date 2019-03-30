@@ -203,12 +203,12 @@ public class CommandsExecutor {
         addCommand("luk", StatLukCommand.class);
         addCommand("enableauth", EnableAuthCommand.class);
         addCommand("toggleexp", ToggleExpCommand.class);
-        addCommand("mylawn", MapOwnerClaimCommand.class);
+       // addCommand("mylawn", MapOwnerClaimCommand.class);
         addCommand("rebirth", rebirth.class);
         addCommand("job", JobAdvance.class);
         addCommand("goto", GotoCommand.class);
         addCommand("aranquest", AranMahaChat.class);
-
+        addCommand("haste", HasteCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
