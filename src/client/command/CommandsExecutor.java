@@ -212,6 +212,7 @@ public class CommandsExecutor {
         addCommand("whatdropsfrom", WhatDropsFromCommand.class);
         addCommand("whodrops",  WhoDropsCommand.class);
         addCommand("buff",  BuffCommand0.class);
+        addCommand("recharge", Recharge0.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -234,7 +235,7 @@ public class CommandsExecutor {
     private void registerLv2Commands(){
         levelCommandsCursor = new Pair<>((List<String>) new ArrayList<String>(), (List<String>) new ArrayList<String>());
         
-        addCommand("recharge", 2, RechargeCommand.class);
+        //addCommand("recharge", 2, RechargeCommand.class);
         addCommand("whereami", 2, WhereaMiCommand.class);
         addCommand("hide", 2, HideCommand.class);
         addCommand("unhide", 2, UnHideCommand.class);

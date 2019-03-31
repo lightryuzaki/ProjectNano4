@@ -21,17 +21,17 @@
 /*
    @Author: Arthur L - Refactored command content into modules
 */
-package client.command.commands.gm2;
+package client.command.commands.gm0;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import constants.ItemConstants;
 import server.MapleItemInformationProvider;
 
-public class RechargeCommand extends Command {
+public class Recharge0 extends Command {
     {
         setDescription("");
     }
@@ -50,10 +50,10 @@ public class RechargeCommand extends Command {
             } else if (ItemConstants.isBullet(torecharge.getItemId())){
                 torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
                 c.getPlayer().forceUpdateItem(torecharge);
-            } else if (ItemConstants.isConsumable(torecharge.getItemId())){
-                torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
-                c.getPlayer().forceUpdateItem(torecharge);
-            }
+            } //else if (ItemConstants.isConsumable(torecharge.getItemId())){
+                //torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
+               // c.getPlayer().forceUpdateItem(torecharge);
+           // }
         }
         player.dropMessage(5, "USE Recharged.");
     }
