@@ -208,6 +208,7 @@ public class CommandsExecutor {
         addCommand("job", JobAdvance.class);
         addCommand("goto", GotoCommand.class);
         addCommand("aranquest", AranMahaChat.class);
+        addCommand("aranmastery", AranMastery.class);
         addCommand("haste", HasteCommand.class);
         addCommand("whatdropsfrom", WhatDropsFromCommand.class);
         addCommand("whodrops",  WhoDropsCommand.class);
