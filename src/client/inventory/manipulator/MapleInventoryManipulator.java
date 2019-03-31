@@ -678,14 +678,6 @@ public class MapleInventoryManipulator {
                 }
             } else if (ItemConstants.isWeddingRing(source.getItemId())) {
                 map.disappearingItemDrop(chr, chr, target, dropPos);
-            } else if (map.getEverlast()) {
-                if (ii.isDropRestricted(target.getItemId())) {
-                    map.disappearingItemDrop(chr, chr, target, dropPos);
-                } else {
-                    map.spawnItemDrop(chr, chr, target, dropPos, true, true);
-                }
-            } else if (ii.isDropRestricted(target.getItemId())) {
-                map.disappearingItemDrop(chr, chr, target, dropPos);
             } else {
                 map.spawnItemDrop(chr, chr, target, dropPos, true, true);
             }
@@ -714,18 +706,8 @@ public class MapleInventoryManipulator {
                     c.getAbstractPlayerInteraction().removeAll(4301000);
                 }
             }
-            
-            if (map.getEverlast()) {
-                if (ii.isDropRestricted(itemId) ) {
-                    map.disappearingItemDrop(chr, chr, source, dropPos);
-                } else {
-                    map.spawnItemDrop(chr, chr, source, dropPos, true, true);
-                }
-            } else if (ii.isDropRestricted(itemId)) {
-                map.disappearingItemDrop(chr, chr, source, dropPos);           
-            } else {
-                map.spawnItemDrop(chr, chr, source, dropPos, true, true);
-            }
+
+            map.spawnItemDrop(chr, chr, source, dropPos, true, true);
         }
     }
 
