@@ -6,38 +6,46 @@ function action(mode, type, selection) {
 		//cm.resetStats();
  // Double Swing
  if(cm.getPlayer().getSkillLevel(2221003) == 0)
-		cm.teachSkill(2221003,0, 10); // Combat Ability
+     cm.changeSkillLevel(2221003,0, 10); // Combat Ability
 		if(cm.getPlayer().getSkillLevel(21000000) == 0)
-		cm.teachSkill(21000000,0,10);
+            cm.changeSkillLevel(21000000,0,10);
  // Combat Step
  if(cm.getPlayer().getSkillLevel(21001003) == 0)
-		cm.teachSkill(21001003,0, 0); // Pole Arm Booster
+     cm.changeSkillLevel(21001003,0, 0); // Pole Arm Booster
 		// Aran Second job
+    if(cm.getPlayer().getSkillLevel(21100005) == 0)
+        cm.changeSkillLevel(21100005,0, 0);
+    if(cm.getPlayer().getSkillLevel(21100004) == 0)
+        cm.changeSkillLevel(21100004,0, 0);
+    if(cm.getPlayer().getSkillLevel(21001003) == 0)
+        cm.changeSkillLevel(21001003,0, 0);
+    if(cm.getPlayer().getSkillLevel(21100002) == 0)
+        cm.changeSkillLevel(21100000,0, 0);
  // Triple Swing
  if(cm.getPlayer().getSkillLevel(21100000) == 0)
-		cm.teachSkill(21100000,0, 0); // Pole Arm Mastery
+     cm.changeSkillLevel(21100000,0, 0); // Pole Arm Mastery
 		if(cm.getPlayer().getSkillLevel(21100002) == 0)
-		cm.teachSkill(21100002,0,0); // Final Charge
+            cm.changeSkillLevel(21100002,0,0); // Final Charge
  // Body Pressure
  if(cm.getPlayer().getSkillLevel(21100004) == 0)
-		cm.teachSkill(21100004,0,0);  //Combo Smash
+     cm.changeSkillLevel(21100004,0,0);  //Combo Smash
 		if(cm.getPlayer().getSkillLevel(21100005) == 0)
-		cm.teachSkill(21100005,0,0); // Combo Drain
+            cm.changeSkillLevel(21100005,0,0); // Combo Drain
 		// Aran Thief Job
 		if(cm.getPlayer().getSkillLevel(21110000) == 0)
-		cm.teachSkill(21110000,0,0); // Critical Combo
+            cm.changeSkillLevel(21110000,0,0); // Critical Combo
 		if(cm.getPlayer().getSkillLevel(21110002) == 0)
-		cm.teachSkill(21110002,0,0); // Full Swing
+            cm.changeSkillLevell(21110002,0,0); // Full Swing
 		if(cm.getPlayer().getSkillLevel(21110003) == 0)
-		cm.teachSkill(21110003,0,0); // Final Toss
+            cm.changeSkillLevel(21110003,0,0); // Final Toss
 		if(cm.getPlayer().getSkillLevel(21110004) == 0)
-		cm.teachSkill(21110004,0,0); // Fenir Phantom
+            cm.changeSkillLevel(21110004,0,0); // Fenir Phantom
 		if(cm.getPlayer().getSkillLevel(21110005) == 0)
-		cm.teachSkill(21111005,0,0); // Snow Charge
+            cm.changeSkillLevel(21111005,0,0); // Snow Charge
 		if(cm.getPlayer().getSkillLevel(21110006) == 0)
-		cm.teachSkill(21110006,0,0); // WhirlWind
+            cm.changeSkillLevel(21110006,0,0); // WhirlWind
 		if(cm.getPlayer().getSkillLevel(21111001) == 0)
-		cm.teachSkill(21111001,0,0); // Smart Knockback
+            cm.changeSkillLevel(21111001,0,0); // Smart Knockback
 		/*if(cm.getJobId() == 212) {
                                         if(cm.getPlayer().getSkillLevel(2121007) == 0)
                                                 cm.teachSkill(2121007 , 0, 10, -1);
