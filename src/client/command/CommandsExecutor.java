@@ -209,9 +209,9 @@ public class CommandsExecutor {
         addCommand("goto", GotoCommand.class);
         addCommand("aranquest", AranMahaChat.class);
         addCommand("aranmastery", AranMastery.class);
-        addCommand("haste", HasteCommand.class);
         addCommand("whatdropsfrom", WhatDropsFromCommand.class);
         addCommand("whodrops",  WhoDropsCommand.class);
+        addCommand("buff",  BuffCommand0.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -242,7 +242,6 @@ public class CommandsExecutor {
         addCommand("ap", 2, ApCommand.class);
         addCommand("empowerme", 2, EmpowerMeCommand.class);
         addCommand("buffmap", 2, BuffMapCommand.class);
-        addCommand("buff", 2, BuffCommand.class);
         addCommand("bomb", 2, BombCommand.class);
         addCommand("dc", 2, DcCommand.class);
         addCommand("cleardrops", 2, ClearDropsCommand.class);

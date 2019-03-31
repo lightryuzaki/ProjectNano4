@@ -28,7 +28,7 @@ import client.MapleClient;
 import client.SkillFactory;
 import client.command.Command;
 
-public class HasteCommand extends Command {
+public class BuffCommand0 extends Command {
     {
         setDescription("");
     }
@@ -36,7 +36,8 @@ public class HasteCommand extends Command {
     @Override
     public void execute(MapleClient c, String[] params) {
         MapleCharacter player = c.getPlayer();
-        SkillFactory.getSkill(4101004).getEffect(SkillFactory.getSkill(4101004).getMaxLevel()).applyTo(player, true);
+        SkillFactory.getSkill(9101001).getEffect(SkillFactory.getSkill(9101001).getMaxLevel()).applyTo(player, true);
+        SkillFactory.getSkill(9101003).getEffect(SkillFactory.getSkill(9101003).getMaxLevel()).applyTo(player, true);
 
 
     }
