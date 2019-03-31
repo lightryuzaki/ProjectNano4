@@ -91,6 +91,9 @@ public class GameConstants {
 		put("skelegon", 240040511);
 		put("wolfspider", 600020300);
 		put("excavation", 101030104);
+        put("fog", 105040306);
+        put("himes", 800020130);
+        put("pirates", 251010402);
     }};
     
     // used by the "goto" command for only-GMs

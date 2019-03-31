@@ -275,7 +275,7 @@ public class ServerConstants {
     //Wedding Configuration
     public static final int WEDDING_RESERVATION_DELAY = 3;      //Minimum idle slots before processing a wedding reservation.
     public static final int WEDDING_RESERVATION_TIMEOUT = 10;   //Limit time in minutes for the couple to show up before cancelling the wedding reservation.
-    public static final int WEDDING_RESERVATION_INTERVAL = 20;  //Time between wedding starts in minutes.
+    public static final int WEDDING_RESERVATION_INTERVAL = 10;  //Time between wedding starts in minutes.
     public static final int WEDDING_BLESS_EXP = 30000;          //Exp gained per bless count.
     public static final int WEDDING_GIFT_LIMIT = 1;             //Max number of gifts per person to same wishlist on marriage instances.
     public static final boolean WEDDING_BLESSER_SHOWFX = true;  //Pops bubble sprite effect on players blessing the couple. Setting this false shows the blessing effect on the couple instead.
