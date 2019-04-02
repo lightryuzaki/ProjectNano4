@@ -608,9 +608,9 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                         killerPercent = KILLER_MIN_PERCENT_PARTY_EXP + (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
                         leecherPercent = LEECHERS_MAX_PERCENT_PARTY_EXP - (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
                         if (isKiller) {
-                            calculatedExp = xp * killerPercent;
+                            calculatedExp = exp2 * killerPercent;
                         } else {
-                            calculatedExp = (xp * leecherPercent) / (float)(numExpSharers - 1);
+                            calculatedExp = (exp2 * leecherPercent) / (float)(numExpSharers - 1);
                         }
                         float pXP = xp + (partyExp.containsKey(pID) ? partyExp.get(pID) : 0);
                         partyExp.put(pID, pXP);
