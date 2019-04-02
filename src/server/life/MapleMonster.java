@@ -688,7 +688,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             
             int _partyExp = expValueToInteger(partyExp);
             
-            attacker.gainExp(_personalExp, _partyExp, true, false, false);
+            attacker.gainExp(_personalExp, _partyExp, true, false, true);
             attacker.increaseEquipExp(_personalExp);
             attacker.updateQuestMobCount(getId());
         }
