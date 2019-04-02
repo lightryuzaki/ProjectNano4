@@ -145,7 +145,7 @@ public class ServerConstants {
 
     public static final double EQUIP_EXP_RATE = 0.75;                //Rate for equipment exp gain, grows linearly. Set 1.0 for default (about 100~200 same-level range mobs killed to pass equip from level 1 to 2).
     public static final float PARTY_BONUS_EXP_RATE = 1;          //Rate for the party exp bonus reward.
-    public static final double PQ_BONUS_EXP_RATE = 0.5;             //Rate for the PQ exp reward.
+    public static final double PQ_BONUS_EXP_RATE = 8;             //Rate for the PQ exp reward.
 
     public static final int PARTY_EXPERIENCE_MOD = 1;               //Change for event stuff.
 
