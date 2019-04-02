@@ -474,7 +474,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         return takenDamage.containsKey(chr.getId());
     }
     
-    private void distributeExperienceToParty(int pid, float exp, int mostDamageCid, int minThresholdLevel, int killerLevel, Set<MapleCharacter> underleveled, Map<MapleCharacter, Float> partyExpReward) {
+    private void distributeExperienceToParty(int pid, float exp, int mostDamageCid, int minThresholdLevel, int killerLevel, Set<MapleCharacter> underleveled, Map<MapleCharacter, Float> partyExpReward, int killerId) {
         MapleCharacter pchar = getMap().getAnyCharacterFromParty(pid);  // thanks G h o s t, Alfred, Vcoc, BHB for poiting out a bug in detecting party members after membership transactions in a party took place
         
         List<MapleCharacter> members;
@@ -507,16 +507,30 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         }
         
         int numExpSharers = expSharers.size();
-        
-        // PARTY BONUS: 2p -> +2% , 3p -> +4% , 4p -> +6% , 5p -> +8% , 6p -> +10%
-        // MOST DAMAGE BONUS: 1.5x bonus
-        final float partyModifier = numExpSharers <= 1 ? 0.0f : 0.02f * (numExpSharers - 1);
-        final float mostDamageModifier = hasMostDamageCid ? 1.5f : 1.0f;
-        final float partyExp = exp * partyModifier * mostDamageModifier;
-        
+
+        final float totalPartyExp = exp;
+
+        final float KILLER_MAX_PERCENT_PARTY_EXP = 0.6f;
+        final float KILLER_MIN_PERCENT_PARTY_EXP = 0.5f;
+        final float LEECHERS_MAX_PERCENT_PARTY_EXP = 0.5f;
+        final float LEECHERS_MIN_PERCENT_PARTY_EXP = 0.4f;
+
+        final float SCALE_BY_PARTY_SIZE = (KILLER_MAX_PERCENT_PARTY_EXP - KILLER_MIN_PERCENT_PARTY_EXP) / 4.0f;
+        float killerPercent = KILLER_MAX_PERCENT_PARTY_EXP;
+        float leecherPercent = LEECHERS_MIN_PERCENT_PARTY_EXP;
+        float numExpSharersFloat = (float) (6 - numExpSharers);
+
+        killerPercent = KILLER_MIN_PERCENT_PARTY_EXP + (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
+        leecherPercent = LEECHERS_MAX_PERCENT_PARTY_EXP - (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
+
         for (MapleCharacter mc : expSharers) {
-            float levelPenaltyModifier = (float) Math.sqrt(((float) mc.getLevel()) / expSharersMaxLevel);
-            partyExpReward.put(mc, partyExp * levelPenaltyModifier);
+            float calculatedExp = 0.0f;
+            if (mc.getId() == killerId) {
+                calculatedExp = totalPartyExp * killerPercent;
+            } else {
+                calculatedExp = (totalPartyExp * leecherPercent) / numExpSharersFloat;
+            }
+            partyExpReward.put(mc, calculatedExp);
         }
     }
 
@@ -620,7 +634,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         
         int mostDamageCid = this.getHighestDamagerId();
         for (Entry<Integer, Float> party : partyExp.entrySet()) {
-            distributeExperienceToParty(party.getKey(), party.getValue(), mostDamageCid, minThresholdLevel, killerLevel, underleveled, partyExpReward);
+            distributeExperienceToParty(party.getKey(), party.getValue(), mostDamageCid, minThresholdLevel, killerLevel, underleveled, partyExpReward, killerId);
         }
         
         for(MapleCharacter mc : underleveled) {
