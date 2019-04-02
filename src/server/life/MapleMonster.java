@@ -570,16 +570,6 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         
         Set<MapleCharacter> underleveled = new HashSet<>();
         Collection<MapleCharacter> mapChrs = map.getCharacters();
-
-        final float KILLER_MAX_PERCENT_PARTY_EXP = 0.6f;
-        final float KILLER_MIN_PERCENT_PARTY_EXP = 0.5f;
-        final float LEECHERS_MAX_PERCENT_PARTY_EXP = 0.5f;
-        final float LEECHERS_MIN_PERCENT_PARTY_EXP = 0.4f;
-
-        final float SCALE_BY_PARTY_SIZE = (KILLER_MAX_PERCENT_PARTY_EXP - KILLER_MIN_PERCENT_PARTY_EXP) / 4.0f;
-        float killerPercent = KILLER_MAX_PERCENT_PARTY_EXP;
-        float leecherPercent = LEECHERS_MIN_PERCENT_PARTY_EXP;
-
         for (MapleCharacter mc : mapChrs) {
             Float mcExp = expDist.remove(mc.getId());
             if (mcExp != null) {
@@ -596,28 +586,14 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 
                 if(mc.getLevel() >= minThresholdLevel) {
                     //NO EXP WILL BE GIVEN for those who are underleveled!
-                    float calculatedExp = 0.0f;
-
+                    personalExpReward.put(mc, xp);
+                    
                     MapleParty p = mc.getParty();
                     if (p != null) {    // for party bonus exp
                         int pID = p.getId();
-                        MapleCharacter pchar = getMap().getAnyCharacterFromParty(pID);
-                        List<MapleCharacter> members = pchar.getPartyMembersOnSameMap();
-                        int numExpSharers = members.size();
-                        float numExpSharersFloat = (float) (6 - numExpSharers);
-                        killerPercent = KILLER_MIN_PERCENT_PARTY_EXP + (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
-                        leecherPercent = LEECHERS_MAX_PERCENT_PARTY_EXP - (SCALE_BY_PARTY_SIZE * numExpSharersFloat);
-                        if (isKiller) {
-                            calculatedExp = exp2 * killerPercent;
-                        } else {
-                            calculatedExp = (exp2 * leecherPercent) / (float)(numExpSharers - 1);
-                        }
                         float pXP = xp + (partyExp.containsKey(pID) ? partyExp.get(pID) : 0);
                         partyExp.put(pID, pXP);
-                    } else {
-                        calculatedExp = xp;
                     }
-                    personalExpReward.put(mc, calculatedExp);
                 } else {
                     underleveled.add(mc);
                 }
