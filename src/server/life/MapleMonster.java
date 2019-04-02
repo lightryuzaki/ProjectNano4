@@ -528,7 +528,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             if (mc.getId() == killerId) {
                 calculatedExp = totalPartyExp * killerPercent;
             } else {
-                calculatedExp = (totalPartyExp * leecherPercent) / (float)(numExpSharers - 1);
+                calculatedExp = (totalPartyExp * leecherPercent) / numExpSharersFloat;
             }
             partyExpReward.put(mc, calculatedExp);
         }
