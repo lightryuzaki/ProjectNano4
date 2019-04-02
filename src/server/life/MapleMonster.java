@@ -474,7 +474,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         return takenDamage.containsKey(chr.getId());
     }
     
-    private void distributeExperienceToParty(int pid, float exp, int mostDamageCid, int minThresholdLevel, int killerLevel, Set<MapleCharacter> underleveled, Map<MapleCharacter, Float> partyExpReward) {
+    private void distributeExperienceToParty(int pid, float exp, int mostDamageCid, int minThresholdLevel, int killerLevel, Set<MapleCharacter> underleveled, Map<MapleCharacter, Float> partyExpReward, int killerId, Float leecherPercent) {
         MapleCharacter pchar = getMap().getAnyCharacterFromParty(pid);  // thanks G h o s t, Alfred, Vcoc, BHB for poiting out a bug in detecting party members after membership transactions in a party took place
         
         List<MapleCharacter> members;
@@ -499,24 +499,19 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                     if (expSharersMaxLevel < mc.getLevel()) {
                         expSharersMaxLevel = mc.getLevel();
                     }
-                    expSharers.add(mc);
+                    if (mc.getId() != killerId) {
+                        expSharers.add(mc);
+                    }
                 }
             } else {
                 underleveled.add(mc);
             }
         }
         
+        final float partyExp = exp * leecherPercent;
         int numExpSharers = expSharers.size();
-        
-        // PARTY BONUS: 2p -> +2% , 3p -> +4% , 4p -> +6% , 5p -> +8% , 6p -> +10%
-        // MOST DAMAGE BONUS: 1.5x bonus
-        final float partyModifier = numExpSharers <= 1 ? 0.0f : 0.02f * (numExpSharers - 1);
-        final float mostDamageModifier = hasMostDamageCid ? 1.5f : 1.0f;
-        final float partyExp = exp * partyModifier * mostDamageModifier;
-        
         for (MapleCharacter mc : expSharers) {
-            float levelPenaltyModifier = (float) Math.sqrt(((float) mc.getLevel()) / expSharersMaxLevel);
-            partyExpReward.put(mc, partyExp * levelPenaltyModifier);
+            partyExpReward.put(mc, partyExp / numExpSharers);
         }
     }
 
@@ -586,13 +581,21 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 
                 if(mc.getLevel() >= minThresholdLevel) {
                     //NO EXP WILL BE GIVEN for those who are underleveled!
-                    personalExpReward.put(mc, xp);
-                    
                     MapleParty p = mc.getParty();
                     if (p != null) {    // for party bonus exp
                         int pID = p.getId();
                         float pXP = xp + (partyExp.containsKey(pID) ? partyExp.get(pID) : 0);
+
+                        int currentPartySize = p.getMembers().size();
+                        if (currentPartySize > 1) {
+                            Float killerPercent = getKillerPercent(currentPartySize);
+                            personalExpReward.put(mc, xp * killerPercent);
+                        } else {
+                            personalExpReward.put(mc, xp);
+                        }
                         partyExp.put(pID, pXP);
+                    } else {
+                        personalExpReward.put(mc, xp);
                     }
                 } else {
                     underleveled.add(mc);
@@ -620,7 +623,11 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         
         int mostDamageCid = this.getHighestDamagerId();
         for (Entry<Integer, Float> party : partyExp.entrySet()) {
-            distributeExperienceToParty(party.getKey(), party.getValue(), mostDamageCid, minThresholdLevel, killerLevel, underleveled, partyExpReward);
+            MapleCharacter pchar = getMap().getAnyCharacterFromParty(party.getKey());
+            List<MapleCharacter> currentParty = pchar.getPartyMembersOnSameMap();
+            int currentPartySize = currentParty.size();
+            Float leecherPercent = getLeecherPercent(currentPartySize);
+            distributeExperienceToParty(party.getKey(), party.getValue(), mostDamageCid, minThresholdLevel, killerLevel, underleveled, partyExpReward, killerId, leecherPercent);
         }
         
         for(MapleCharacter mc : underleveled) {
@@ -628,6 +635,27 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         }
         
         propagateExperienceGains(personalExpReward, partyExpReward);
+    }
+
+    private float getLeecherPercent(int currentPartySize) {
+        return getPartyPercent(currentPartySize, false);
+    }
+
+    private float getKillerPercent(int currentPartySize) {
+        return getPartyPercent(currentPartySize, true);
+
+    }
+
+    private float getPartyPercent(int currentPartySize, boolean isKiller) {
+        Float KILLER_DEFAULT_PARTY_EXP_PERCENT = 0.6f;
+        Float LEECHER_DEFAULT_PARTY_EXP_PERCENT = 0.4f;
+        Float PARTY_EXP_FACTOR = 0.025f;
+        Float scaleByPartySize = currentPartySize > 1 ? currentPartySize - 2.0f : 1.0f;
+        if (isKiller) {
+            return currentPartySize == 1 ? 1.0f : KILLER_DEFAULT_PARTY_EXP_PERCENT - (PARTY_EXP_FACTOR * scaleByPartySize);
+        } else {
+            return currentPartySize == 1 ? 1.0f : LEECHER_DEFAULT_PARTY_EXP_PERCENT + (PARTY_EXP_FACTOR * scaleByPartySize);
+        }
     }
     
     private float getStatusExpMultiplier(MapleCharacter attacker) {
@@ -677,16 +705,17 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             }
 
             int _personalExp = expValueToInteger(personalExp); // assuming no negative xp here
-            
-            if (partyExp != null) {
-                partyExp *= getStatusExpMultiplier(attacker);
-                partyExp *= attacker.getExpRate();
-                partyExp *= ServerConstants.PARTY_BONUS_EXP_RATE;
+
+            Float currentPartyExp = partyExp;
+            if (currentPartyExp != null) {
+                currentPartyExp *= getStatusExpMultiplier(attacker);
+                currentPartyExp *= attacker.getExpRate();
+                currentPartyExp *= ServerConstants.PARTY_BONUS_EXP_RATE;
             } else {
-                partyExp = 0.0f;
+                currentPartyExp = 0.0f;
             }
             
-            int _partyExp = expValueToInteger(partyExp);
+            int _partyExp = expValueToInteger(currentPartyExp);
             
             attacker.gainExp(_personalExp, _partyExp, true, false, true);
             attacker.increaseEquipExp(_personalExp);
