@@ -4846,7 +4846,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     }
     
     public int getMaxClassLevel() {
-        return isCygnus() ? 120 : 200;
+        return isCygnus() ? 200 : 200;
     }
     
     public int getMaxLevel() {
@@ -7908,7 +7908,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             PreparedStatement ps;
             ps = con.prepareStatement("UPDATE characters SET level = ?, fame = ?, str = ?, dex = ?, luk = ?, `int` = ?, exp = ?, gachaexp = ?, hp = ?, mp = ?, maxhp = ?, maxmp = ?, sp = ?, ap = ?, gm = ?, skincolor = ?, gender = ?, job = ?, hair = ?, face = ?, map = ?, meso = ?, hpMpUsed = ?, spawnpoint = ?, party = ?, buddyCapacity = ?, messengerid = ?, messengerposition = ?, mountlevel = ?, mountexp = ?, mounttiredness= ?, equipslots = ?, useslots = ?, setupslots = ?, etcslots = ?,  monsterbookcover = ?, vanquisherStage = ?, dojoPoints = ?, lastDojoStage = ?, finishedDojoTutorial = ?, vanquisherKills = ?, matchcardwins = ?, matchcardlosses = ?, matchcardties = ?, omokwins = ?, omoklosses = ?, omokties = ?, dataString = ?, fquest = ?, jailexpire = ?, partnerId = ?, marriageItemId = ?, lastExpGainTime = ? WHERE id = ?", Statement.RETURN_GENERATED_KEYS);
             if (gmLevel < 1 && level > 199) {
-                ps.setInt(1, isCygnus() ? 120 : 200);
+                ps.setInt(1, isCygnus() ? 200 : 200);
             } else {
                 ps.setInt(1, level);
             }
