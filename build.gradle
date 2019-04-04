@@ -47,10 +47,6 @@ sourceSets {
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.bootClasspath = "$JDK7_HOME/jre/lib/rt.jar;$JDK7_HOME/jre/lib/jce.jar"
-}
-
 task copyJarToDist(type: Copy) {
     from 'build/dist/ProjectNano.jar'
     into 'dist'
@@ -62,4 +58,15 @@ task buildAndCopy {
 
     build.mustRunAfter clean
     finalizedBy copyJarToDist
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'net.server.Server'
+        )
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

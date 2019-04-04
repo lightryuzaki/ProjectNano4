@@ -1,0 +1,32 @@
+version: "2"
+
+volumes:
+  db:
+  server:
+
+services:
+  db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "sharkbaitx"
+      MYSQL_DATABASE: "projectnano"
+      MYSQL_USER: "pnano"
+      MYSQL_PASSWORD: "sharkbaitx"
+  server:
+    image: projectnano
+    restart: always
+    ports:
+      - 8484:8484
+      - 7575:7575
+      - 7576:7576
+      - 7577:7577
+      - 7578:7578
+      - 7579:7579
+    links:
+      - db
