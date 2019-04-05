@@ -19,7 +19,7 @@ import server.quest.MapleQuest;
  * @author Ronan
  */
 public class GameConstants {
-    public static String[] WORLD_NAMES = {"Scania", "Bera", "Broa", "Windia", "Khaini", "Bellocan", "Mardia", "Kradia", "Yellonde", "Demethos", "Galicia", "El Nido", "Zenith", "Arcenia", "Kastia", "Judis", "Plana", "Kalluna", "Stius", "Croa", "Medere"};
+    public static String[] WORLD_NAMES = {"Windia", "Bera", "Broa", "Scania", "Khaini", "Bellocan", "Mardia", "Kradia", "Yellonde", "Demethos", "Galicia", "El Nido", "Zenith", "Arcenia", "Kastia", "Judis", "Plana", "Kalluna", "Stius", "Croa", "Medere"};
     public static final int[]  OWL_DATA = new int[]{1082002, 2070005, 2070006, 1022047, 1102041, 2044705, 2340000, 2040017, 1092030, 2040804};
     public static final int[] CASH_DATA = new int[]{50200004, 50200069, 50200117, 50100008, 50000047};
     
@@ -90,10 +90,28 @@ public class GameConstants {
         put("mushking", 106020000);
 		put("skelegon", 240040511);
 		put("wolfspider", 600020300);
-		put("excavation", 101030104);
+		put("gpq", 101030104);
         put("fog", 105040306);
         put("himes", 800020130);
         put("pirates", 251010402);
+        put("excavation", 990000000);
+        put("mushmom", 100000005);
+        put("griffey", 240020101);
+        put("manon", 240020401);
+        put("hh", 682000001);
+        put("balrog", 105090900);
+        put("zakum", 211042300);
+        put("papu", 220080001);
+        put("guild", 200000301);
+        put("skelegon", 240040511);
+        put("hpq", 100000200);
+        put("pianus", 230040420);
+        put("horntail", 240050400);
+        put("pinkbean", 270050000);
+        put("keep", 610020006);
+        put("dojo", 925020001);
+        put("bosspq", 970030000);
+        put("fm", 910000000);
     }};
     
     // used by the "goto" command for only-GMs
@@ -101,6 +119,7 @@ public class GameConstants {
         putAll(GOTO_TOWNS);
         
         put("gmmap", 180000000);
+        /*
         put("excavation", 990000000);
         put("mushmom", 100000005);
         put("griffey", 240020101);
@@ -119,6 +138,7 @@ public class GameConstants {
         put("dojo", 925020001);
         put("bosspq", 970030000);
         put("fm", 910000000);
+        */
     }};
     
     public static final List<String> GAME_SONGS = new ArrayList<String>(170) {{
