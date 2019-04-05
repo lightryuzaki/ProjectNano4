@@ -22,7 +22,7 @@ var items = [1022082,
 /*Starts at 95, 60% Scrolls */                 2040914, 2040919, 2044301, 2044401, 2044501, 2044601, 2044701, 2044801, 2044901, 2044201, 2044101, 2044001, 2043001, 2043101, 2043201, 2043801, 2043701, 2043301];
 
 function start() {
-    cm.sendSimple("Welcome to the vote point exchange npc you have.#r" +cm.getrewardpoints() +"#k votepoints Go to the website and vote to gain votepoints. What would u like to buy with your votepoints? #b\r\n#L0# Buy some scrolls 1 for 1 votepoint #b\r\n#L1# Buy ITCG Equips 3 votepoints #b\r\n#L2# Buy VIP Weapons for 15 votepoints");
+    cm.sendSimple("Welcome to the vote point exchange npc you have.#r" +cm.getrewardpoints() +"#k Reward Points Go to the website and vote to gain Reward points. What would u like to buy? #b\r\n#L0# Buy some scrolls 1 for 1 RP #b\r\n#L1# Buy ITCG Equips 3 RP #b\r\n#L2# Buy VIP Weapons for 15 RP");
 }
 
 function action (m,t,s) {
@@ -50,7 +50,8 @@ function action (m,t,s) {
         if (sel == 100) {
             if (cm.getRewardPoints() >= 6) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)){
-                cm.setRewardPoints(-6);
+                    var currentRewardPoints = cm.getPlayer().getRewardPoints();
+                    cm.getPlayer().setRewardPoints(currentRewardPoints - 6);
                 cm.gainItem(2340000, 5);
                 }
                 else{
@@ -62,7 +63,8 @@ function action (m,t,s) {
         } else {
             if (cm.getrewardpoints() >= points[s]) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)) {
-                    cm.setRewardPoints(-points[s]);
+                    var currentRewardPoints = cm.getPlayer().getRewardPoints();
+                    cm.getPlayer().setRewardPoints(currentRewardPoints - points[s]);
                     if (items[s] == 2049100 || items[s] == 2340000 || items[s] == 2049003) {
                         cm.gainItem(items[s], 1);
                     }
