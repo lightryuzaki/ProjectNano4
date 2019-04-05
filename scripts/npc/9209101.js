@@ -50,7 +50,8 @@ function action (m,t,s) {
         if (sel == 100) {
             if (cm.getRewardPoints() >= 6) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)){
-                cm.setRewardPoints(-6);
+                    var currentRewardPoints = cm.getPlayer().getRewardPoints();
+                    cm.getPlayer().setRewardPoints(currentRewardPoints - 6);
                 cm.gainItem(2340000, 5);
                 }
                 else{
@@ -62,7 +63,8 @@ function action (m,t,s) {
         } else {
             if (cm.getrewardpoints() >= points[s]) {
                 if(!cm.getPlayer().getInventory(Packages.client.inventory.MapleInventoryType.EQUIP).isFull(2)) {
-                    cm.setRewardPoints(-points[s]);
+                    var currentRewardPoints = cm.getPlayer().getRewardPoints();
+                    cm.getPlayer().setRewardPoints(currentRewardPoints - points[s]);
                     if (items[s] == 2049100 || items[s] == 2340000 || items[s] == 2049003) {
                         cm.gainItem(items[s], 1);
                     }
@@ -86,4 +88,4 @@ function action (m,t,s) {
         }
         cm.dispose();
     }
-}  
+}
