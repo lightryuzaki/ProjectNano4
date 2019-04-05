@@ -472,9 +472,9 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                                         if(api.haveItem(shellId, 1)) {
                                             api.gainItem(shellId, (short) -1, false);
                                             totDamageToOneMonster *= player.getLevel();
-                                        } else {
+                                        } /*else {
                                             player.dropMessage(5, "You have ran out of shells to activate the hidden power of Three Snails.");
-                                        }
+                                        } */
                                     } else {
                                         totDamageToOneMonster = 0;
                                     }
