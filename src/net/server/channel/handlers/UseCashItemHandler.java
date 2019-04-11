@@ -480,7 +480,7 @@ public final class UseCashItemHandler extends AbstractMaplePacketHandler {
                 MapleShop shop = MapleShopFactory.getInstance().getShop(1338);
                 if (shop != null) {
                     shop.sendShop(c);
-                    remove(c, position, itemId);
+                    //remove(c, position, itemId);
                 }
             } else {
                 c.announce(MaplePacketCreator.enableActions());
