@@ -61,6 +61,16 @@ function action(mode, type, selection) {
                 cm.sendOk("You do not meet the criteria to battle " + expedBoss + "!");
                 cm.dispose();
             } else if (expedition == null) { //Start an expedition
+		var entryCheck = cm.playerHasEntriesLeftForHorntail(player);
+                if (entryCheck === 1) {
+                    cm.sendOk("You have reached the maximum entry for the day. Please come back after 24 hours.");
+                    cm.dispose();
+                    return;
+                } else if (entryCheck > 1) {
+                    cm.sendOk("Please contact a staff member. Error code: 504");
+                    cm.dispose();
+                    return;
+                }
                 cm.sendSimple("#e#b<Expedition: " + expedName + ">\r\n#k#n" + em.getProperty("party") + "\r\n\r\nWould you like to assemble a team to take on #r" + expedBoss + "#k?\r\n#b#L1#Lets get this going!#l\r\n\#L2#No, I think I'll wait a bit...#l");
                 status = 1;
             } else if (expedition.isLeader(player)) { //If you're the leader, manage the exped
@@ -71,6 +81,16 @@ function action(mode, type, selection) {
                     cm.sendOk("You have already registered for the expedition. Please wait for #r" + expedition.getLeader().getName() + "#k to begin it.");
                     cm.dispose();
                 } else { //If you aren't in it, you're going to get added
+		var entryCheck = cm.playerHasEntriesLeftForHorntail(player);
+                if (entryCheck === 1) {
+                    cm.sendOk("You have reached the maximum entry for the day. Please come back after 24 hours.");
+                    cm.dispose();
+                    return;
+                } else if (entryCheck > 1) {
+                    cm.sendOk("Please contact a staff member. Error code: 504");
+                    cm.dispose();
+                    return;
+                }
                     cm.sendOk(expedition.addMember(cm.getPlayer()));
                     cm.dispose();
                 }
