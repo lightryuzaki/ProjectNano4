@@ -53,9 +53,8 @@ function action(mode, type, selection) {
                     status = 10;
                     cm.sendOk("There are some of the party members that is not on the map!");
                 } else {
-                    if (!cm.sendCPQMapLists2()) {
-                        cm.sendOk("All Monster Carnival fields are currently in use! Try again later.");
-                        cm.dispose();
+                    cm.sendCPQMapLists2();
+                        
                 }
             }
         } else if (status == 1) {
