@@ -58,7 +58,7 @@ import client.inventory.Item;
 import client.inventory.ItemFactory;
 import client.inventory.MaplePet;
 import constants.ItemConstants;
-import constants.LanguageConstants;
+import constants.CPQTextConstants;
 import net.server.PlayerStorage;
 import net.server.channel.Channel;
 import server.MapleSkillbookInformationProvider;
@@ -641,7 +641,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
         }
 
         public void sendCPQMapLists() {
-            String msg = LanguageConstants.Linguas(getPlayer()).CPQInicioEscolha;
+            String msg = CPQTextConstants.CPQPickRoom;
             for (int i = 0; i < 6; i++) {
                 if (fieldTaken(i)) {
                     if (fieldLobbied(i)) {
@@ -696,7 +696,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
                     mc = ps.getCharacterById(mpc.getId());
                     if (mc != null) {
                         mc.changeMap(map, map.getPortal(0));
-                        mc.announce(MaplePacketCreator.serverNotice(6, LanguageConstants.Linguas(mc).CPQEntradaLobby));
+                        mc.announce(MaplePacketCreator.serverNotice(6, CPQTextConstants.CPQEntryLobby));
                         TimerManager tMan = TimerManager.getInstance();
                         tMan.schedule(new Runnable() {
                             @Override
@@ -722,7 +722,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
             return c.getChannelServer().getPlayerStorage().getCharacterById(id);
         }
 
-        public void cancelarSaida() {
+        public void cancelCPQLobby() {
             PlayerStorage ps = c.getChannelServer().getPlayerStorage();
             for (MaplePartyCharacter mpc : c.getPlayer().getParty().getMembers()) {
                 MapleCharacter mc = ps.getCharacterById(mpc.getId());
@@ -734,7 +734,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
 
         public void startCPQ(final MapleCharacter challenger, final int field) {
             try {
-                cancelarSaida();
+                cancelCPQLobby();
                 if (challenger != null) {
                     if (challenger.getParty() == null) {
                         throw new RuntimeException("Nao existe oponente!");
@@ -791,7 +791,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
 
         public void startCPQ2(final MapleCharacter challenger, final int field) {
             try {
-                cancelarSaida();
+                cancelCPQLobby();
                 if (challenger != null) {
                     if (challenger.getParty() == null) {
                         throw new RuntimeException("Não existe oponente!");
@@ -830,7 +830,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
         }
 
         public void sendCPQMapLists2() {
-            String msg = LanguageConstants.Linguas(getPlayer()).CPQInicioEscolha;
+            String msg = CPQTextConstants.CPQPickRoom;
             for (int i = 0; i < 3; i++) {
                 if (fieldTaken2(i)) {
                     if (fieldLobbied2(i)) {
@@ -883,7 +883,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
                     mc = ps.getCharacterByName(mpc.getName());
                     if (mc != null) {
                         mc.changeMap(map, map.getPortal(0));
-                        mc.announce(MaplePacketCreator.serverNotice(6, LanguageConstants.Linguas(mc).CPQEntradaLobby));
+                        mc.announce(MaplePacketCreator.serverNotice(6, CPQTextConstants.CPQEntryLobby));
                         TimerManager tMan = TimerManager.getInstance();
                         tMan.schedule(new Runnable() {
                             @Override
@@ -911,7 +911,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
             for (MapleMapObject mmo : map.getAllPlayer()) {
                 MapleCharacter mc = (MapleCharacter) mmo;
                 if (mc.getParty() == null) {
-                    sendOk(LanguageConstants.Linguas(mc).CPQEscolha);
+                    sendOk(CPQTextConstants.CPQFindError);
                     return;
                 }
                 if (mc.getParty().getLeader().getId() == mc.getId()) {
@@ -927,10 +927,10 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
                     }
                     NPCScriptManager.getInstance().start("cpqchallenge2", leader.getClient(), npc, members);
                 } else {
-                    sendOk(LanguageConstants.Linguas(leader).CPQInicioEscolhaEmEscolha);
+                    sendOk(CPQTextConstants.CPQChallengeRoomAnswer);
                 }
             } else {
-                sendOk(LanguageConstants.Linguas(leader).CPQLiderNaoEncontrado);
+                sendOk(CPQTextConstants.CPQLeaderNotFound);
             }
         }
 
@@ -948,7 +948,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
             for (MapleMapObject mmo : map.getAllPlayer()) {
                 MapleCharacter mc = (MapleCharacter) mmo;
                 if (mc.getParty() == null) {
-                    sendOk(LanguageConstants.Linguas(mc).CPQEscolha);
+                    sendOk(CPQTextConstants.CPQFindError);
                     return;
                 }
                 if (mc.getParty().getLeader().getId() == mc.getId()) {
@@ -964,12 +964,12 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
                     }
                     
                     NPCScriptManager.getInstance().start("cpqchallenge", leader.getClient(), npc, members);
-                    sendOk(LanguageConstants.Linguas(leader).CPQInicioEscolhaEnviada);
+                    sendOk(CPQTextConstants.CPQChallengeRoomSent);
                 } else {
-                    sendOk(LanguageConstants.Linguas(leader).CPQInicioEscolhaEmEscolha);
+                    sendOk(CPQTextConstants.CPQChallengeRoomAnswer);
                 }
             } else {
-                sendOk(LanguageConstants.Linguas(leader).CPQLiderNaoEncontrado);
+                sendOk(CPQTextConstants.CPQLeaderNotFound);
             }
         }
 

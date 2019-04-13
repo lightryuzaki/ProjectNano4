@@ -131,7 +131,6 @@ import client.processor.FredrickProcessor;
 import constants.ExpTable;
 import constants.GameConstants;
 import constants.ItemConstants;
-import constants.LanguageConstants;
 import constants.ServerConstants;
 import constants.skills.Aran;
 import constants.skills.Beginner;
@@ -167,7 +166,6 @@ import server.life.MobSkillFactory;
 import server.maps.MapleMapItem;
 import net.server.audit.locks.MonitoredLockType;
 import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
-import scripting.AbstractPlayerInteraction;
 
 public class MapleCharacter extends AbstractMapleCharacterObject {
     private static final MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
@@ -10287,25 +10285,4 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     public void setChallenged(boolean challenged) {
         this.challenged = challenged;
     }
-
-    public void setLingua(int num) {
-        getClient().setLingua(num);
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            try (PreparedStatement ps = con.prepareStatement("UPDATE accounts SET lingua = ? WHERE id = ?")) {
-                ps.setInt(1, num);
-                ps.setInt(2, getClient().getAccID());
-                ps.executeUpdate();
-            } finally {
-                con.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int getLingua() {
-        return getClient().getLingua();
-    }
-    
 }

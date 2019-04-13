@@ -124,7 +124,6 @@ public class MapleClient {
         private int visibleWorlds;
 	private long lastNpcClick;
 	private long sessionId;
-        private int lingua = 0;
         
         static {
             for (int i = 0; i < 200; i++) {
@@ -542,7 +541,7 @@ public class MapleClient {
 		ResultSet rs = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			ps = con.prepareStatement("SELECT id, password, gender, banned, pin, pic, characterslots, tos, lingua FROM accounts WHERE name = ?");
+			ps = con.prepareStatement("SELECT id, password, gender, banned, pin, pic, characterslots, tos FROM accounts WHERE name = ?");
 			ps.setString(1, login);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -560,7 +559,6 @@ public class MapleClient {
 				pic = rs.getString("pic");
 				gender = rs.getByte("gender");
 				characterSlots = rs.getByte("characterslots");
-                                lingua = rs.getInt("lingua");
 				String passhash = rs.getString("password");
 				byte tos = rs.getByte("tos");
 
@@ -1543,13 +1541,5 @@ public class MapleClient {
         
         public boolean canBypassPic() {
                 return MapleLoginBypassCoordinator.getInstance().canLoginBypass(getNibbleHWID(), accId, true);
-        }
-        
-        public int getLingua() {
-                return lingua;
-        }
-
-        public void setLingua(int lingua) {
-                this.lingua = lingua;
         }
 }
