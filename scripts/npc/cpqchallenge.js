@@ -33,7 +33,7 @@ function action(mode, type, selection) {
                 var snd = "";
                 for (var i = 0; i < party.size(); i++)
                     snd += "#bNome: " + party.get(i).getName() + " / (Level: " + party.get(i).getLevel() + ") / " + party.get(i).getJobNameById(party.get(i).getJobId()) + "#k\r\n\r\n";
-                cm.sendAcceptDecline(snd + "Gostaria de lutar contra este grupo no Festival de Monstros?");
+                cm.sendAcceptDecline(snd + "Would you like to fight this party at the Monster Carnival?");
             } else {
                 return;
             }
@@ -45,7 +45,7 @@ function action(mode, type, selection) {
                 cm.getChar().getParty().setEnemy(ch.getParty());
                 cm.getChar().setChallenged(false);
             } else {
-                cm.sendOk("O numero de players entre os times nao esta igual.");
+                cm.sendOk("The number of players between the teams is not the same.");
             }
             cm.dispose();
         }
