@@ -46,6 +46,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
+import controller.LoadConfigController;
 import net.server.audit.ThreadTracker;
 import net.server.audit.locks.MonitoredLockType;
 import net.server.audit.locks.MonitoredReentrantReadWriteLock;
@@ -69,6 +70,7 @@ import net.server.worker.RankingLoginWorker;
 import net.server.worker.ReleaseLockWorker;
 import net.server.world.World;
 
+import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.buffer.SimpleBufferAllocator;
 import org.apache.mina.core.filterchain.IoFilter;
@@ -89,6 +91,7 @@ import constants.GameConstants;
 import constants.ServerConstants;
 import java.util.TimeZone;
 import net.server.coordinator.MapleSessionCoordinator;
+import property.ServerProperties;
 import server.CashShop.CashItemFactory;
 import server.MapleSkillbookInformationProvider;
 import server.ThreadManager;
@@ -151,6 +154,7 @@ public class Server {
     private boolean availableDeveloperRoom = false;
     private boolean online = false;
     public static long uptime = System.currentTimeMillis();
+    private static ServerProperties ServerProperties = new ServerProperties();
     
     public int getCurrentTimestamp() {
         return (int) (Server.getInstance().getCurrentTime() - Server.uptime);
@@ -870,7 +874,9 @@ public class Server {
         }
 
         System.out.println("ProjectNano v" + ServerConstants.VERSION + " starting up.\r\n");
-        
+
+        LoadConfigController.getInstance().loadServerConfig();
+
         if(ServerConstants.SHUTDOWNHOOK)
             Runtime.getRuntime().addShutdownHook(new Thread(shutdown(false)));
         
@@ -1790,5 +1796,13 @@ public class Server {
             System.gc();
             getInstance().init();//DID I DO EVERYTHING?! D:
         }
+    }
+
+    public static ServerProperties GetServerProperties() {
+        return ServerProperties;
+    }
+
+    public static void SetServerProperties(ServerProperties serverProperties) {
+        ServerProperties = serverProperties;
     }
 }

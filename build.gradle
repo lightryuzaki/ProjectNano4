@@ -37,6 +37,10 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.slf4j:slf4j-jdk14:1.7.5'
     compile 'mysql:mysql-connector-java:5.1.37'
+    compile group: 'org.apache.commons', name: 'commons-configuration2', version: '2.4'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }
 
 sourceSets {

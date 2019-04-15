@@ -19,6 +19,8 @@ services:
       MYSQL_USER: "pnano"
       MYSQL_PASSWORD: "sharkbaitx"
   server:
+    environment:
+      MODE: "${MODE}"
     image: projectnano
     restart: always
     ports:

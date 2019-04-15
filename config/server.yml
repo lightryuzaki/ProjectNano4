@@ -1,0 +1,21 @@
+local:
+  hostname: "127.0.0.1"
+  port: "8484"
+  database:
+    url: "jdbc:mysql://127.0.0.1:3306/projectnano"
+    user: "root"
+    password: ""
+test:
+  hostname: "127.0.0.1"
+    port: "8484"
+    database:
+      url: "jdbc:mysql://127.0.0.1:3306/projectnano"
+      user: "root"
+      password: ""
+production:
+  hostname: "pnano.dddns.net"
+    port: "8484"
+    database:
+      url: "jdbc:mysql://pnano.ddns.net:3306/projectnano"
+      user: "root"
+      password: ""
