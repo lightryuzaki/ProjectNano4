@@ -35,6 +35,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+
+import net.server.Server;
 import tools.FilePrinter;
 
 public class MapScriptManager {
@@ -83,7 +85,7 @@ public class MapScriptManager {
             fr = new FileReader(scriptFile);
             
             // java 8 support here thanks to Arufonsu
-            if (ServerConstants.JAVA_8){
+            if (Server.getInstance().ServerConfig.getJava8()){
                     se.eval("load('nashorn:mozilla_compat.js');" + System.lineSeparator());
             }
             

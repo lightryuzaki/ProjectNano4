@@ -178,7 +178,7 @@ public class EventManager {
     
     private List<Integer> getLobbyRange() {
         try {
-            if (!ServerConstants.JAVA_8) {
+            if (!Server.getInstance().ServerConfig.getJava8()) {
                 return convertToIntegerArray((List<Double>)iv.invokeFunction("setLobbyRange", (Object) null));
             } else {  // java 8 support here thanks to MedicOP
                 /*
