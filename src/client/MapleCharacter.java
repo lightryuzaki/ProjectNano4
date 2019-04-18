@@ -2994,7 +2994,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     }
     
     private synchronized void gainExpInternal(long gain, int equip, int party, boolean show, boolean inChat, boolean white) {   // need of method synchonization here detected thanks to MedicOP
-        long total = Math.max(gain, -exp.get()) + equip;
+        long total = Math.max(gain + equip + party, -exp.get());
         
         if (level < getMaxLevel() && (allowExpGain || this.getEventInstance() != null)) {
             long leftover = 0;
@@ -3005,7 +3005,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 leftover = nextExp - Integer.MAX_VALUE;
             }
             updateSingleStat(MapleStat.EXP, exp.addAndGet((int) total));
-            if (show && gain != 0) {
+            if ((show && gain != 0) || party != 0) {
                 client.announce(MaplePacketCreator.getShowExpGain((int)Math.min(gain, Integer.MAX_VALUE), equip, party, inChat, white));
             }
             while (exp.get() >= ExpTable.getExpNeededForLevel(level)) {
