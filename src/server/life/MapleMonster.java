@@ -586,9 +586,10 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                         int pID = p.getId();
                         float pXP = xp + (partyExp.containsKey(pID) ? partyExp.get(pID) : 0);
 
-                        int currentPartySize = p.getMembers().size();
-                        if (currentPartySize > 1) {
-                            Float killerPercent = getKillerPercent(currentPartySize);
+                        List<MapleCharacter> partyMembersOnSameMap = mc.getPartyMembersOnSameMap();
+                        int mumberOfMembersOnSameMap = partyMembersOnSameMap.size();
+                        if (mumberOfMembersOnSameMap > 1) {
+                            Float killerPercent = getKillerPercent(mumberOfMembersOnSameMap);
                             personalExpReward.put(mc, xp * killerPercent);
                         } else {
                             personalExpReward.put(mc, xp);
