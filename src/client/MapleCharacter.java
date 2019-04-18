@@ -2994,7 +2994,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     }
     
     private synchronized void gainExpInternal(long gain, int equip, int party, boolean show, boolean inChat, boolean white) {   // need of method synchonization here detected thanks to MedicOP
-        long total = Math.max(gain, -exp.get());
+        long total = Math.max(gain, -exp.get()) + equip;
         
         if (level < getMaxLevel() && (allowExpGain || this.getEventInstance() != null)) {
             long leftover = 0;
