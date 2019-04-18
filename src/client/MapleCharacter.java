@@ -2982,7 +2982,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         int equip = (int) Math.min((long)(gain / 10) * pendantExp, Integer.MAX_VALUE);
         
         long total = (long) gain + equip + party;
-        gainExpInternal(total, equip, party, show, inChat, white);
+        gainExpInternal((long) gain, equip, party, show, inChat, white);
     }
     
     public void loseExp(int loss, boolean show, boolean inChat) {
