@@ -137,7 +137,7 @@ function action(mode, type, selection) {
                 cm.sendSimple(text);
                 status = 6;
             } else if (selection == 2) {
-                var min = 2
+                var min = exped.getMinSize();
                 
                 var size = expedition.getMemberList().size();
                 if (size < min) {
