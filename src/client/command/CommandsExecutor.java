@@ -212,6 +212,7 @@ public class CommandsExecutor {
         addCommand("whodrops",  WhoDropsCommand.class);
         addCommand("buff",  BuffCommand0.class);
         addCommand("recharge", Recharge0.class);
+        addCommand("bossentries", BossentriesCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -377,6 +378,7 @@ public class CommandsExecutor {
         addCommand("showmovelife", 5, ShowMoveLifeCommand.class);
         addCommand("showsessions", 5, ShowSessionsCommand.class);
         addCommand("iplist", 5, IpListCommand.class);
+        addCommand("giveentry", 5, GiveBossentriesCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
