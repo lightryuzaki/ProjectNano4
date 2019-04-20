@@ -27,9 +27,12 @@ import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import constants.ServerConstants;
 import net.server.Server;
+import repository.BossentriesRepository;
 import server.MapleItemInformationProvider;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
+
+import static constants.GameConstants.DAILY_ENTRIES_TO_ALL_BOSSES;
 
 /**
  *
@@ -95,7 +98,9 @@ public abstract class CharacterFactory {
                 Server.getInstance().createCharacterEntry(newchar);
                 Server.getInstance().broadcastGMMessage(c.getWorld(), MaplePacketCreator.sendYellowTip("[NEW CHAR]: " + c.getAccountName() + " has created a new character with IGN " + name));
                 FilePrinter.print(FilePrinter.CREATED_CHAR + c.getAccountName() + ".txt", c.getAccountName() + " created character with IGN " + name);
-                
+
+                BossentriesRepository.CreateNewEntryForCharacterId(newchar.getId(), DAILY_ENTRIES_TO_ALL_BOSSES);
+
                 return 0;
         }        
 }

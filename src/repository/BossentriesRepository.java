@@ -62,6 +62,7 @@ public class BossentriesRepository {
             session.save(newCharacterBossentry);
             transaction.commit();
         } catch (Exception e) {
+            System.out.println("ERROR: Failed to create new row for new character in `bossentries` table. CharacterId: " + characterId);
             e.printStackTrace();
         }
     }
