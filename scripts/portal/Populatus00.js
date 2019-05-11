@@ -22,9 +22,26 @@
 
 /* @author RonanLana */
 
+importPackage(Packages.server.expeditions);
+importPackage(Packages.constants);
+
+var exped = MapleExpeditionType.PAPULATUS;
+var isBossLimitsEnabled = ServerConstants.DAILY_BOSS_LIMITS_ENABLED;
+
 function enter(pi) {
     if (!((pi.isQuestStarted(6361) && pi.haveItem(4031870, 1)) || (pi.isQuestCompleted(6361) && !pi.isQuestCompleted(6363)))) {
         var em = pi.getEventManager("PapulatusBattle");
+
+        if (isBossLimitsEnabled) {
+            var entryCheck = pi.partyHasEntriesLeftForExpedition(pi.getPartyMembers(), exped);
+            if (entryCheck === 1) {
+                pi.playerMessage(5, "A member of your party is out of entries for today.");
+                return false;
+            } else if (entryCheck > 1) {
+                pi.playerMessage(5, "Your boss entries cannot be accessed. If the problem persists, contact the GMs.");
+                return false;
+            }
+        }
 
         if (pi.getParty() == null) {
             pi.playerMessage(5, "You are currently not in a party, create one to attempt the boss.");
@@ -45,10 +62,27 @@ function enter(pi) {
                 return false;
             }
 
+            if (isBossLimitsEnabled) {
+                var decrementCheck = pi.decrementEntriesForParty(pi.getPartyMembers(), exped);
+                if (decrementCheck > 0) {
+                    pi.playerMessage(5, "An error occurred. Please contact a GM.");
+                    return false;
+                }
+            }
+
             pi.playPortalSound();
             return true;
         }
-    } else {
+    }
+    else {
+        if (isBossLimitsEnabled) {
+            var decrementCheck = pi.decrementEntriesForParty(pi.getPartyMembers(), exped);
+            if (decrementCheck > 0) {
+                pi.playerMessage(5, "An error occurred. Please contact a GM.");
+                return false;
+            }
+        }
+
         pi.playPortalSound();
         pi.warp(922020300);
         return true;
