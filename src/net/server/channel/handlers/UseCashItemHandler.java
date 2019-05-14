@@ -409,7 +409,7 @@ public final class UseCashItemHandler extends AbstractMaplePacketHandler {
             player.setChalkboard(slea.readMapleAsciiString());
             player.getMap().broadcastMessage(MaplePacketCreator.useChalkboard(player, false));
             player.getClient().announce(MaplePacketCreator.enableActions());
-            remove(c, position, itemId);
+            //remove(c, position, itemId);
         } else if (itemType == 539) {
             List<String> strLines = new LinkedList<>();
             for (int i = 0; i < 4; i++) {

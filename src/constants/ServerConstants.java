@@ -22,7 +22,7 @@ public class ServerConstants {
     public static final int CHANNEL_LOAD = 50;                 //Max players per channel (limit actually used to calculate the World server capacity).
     public static final int CHANNEL_LOCKS = 20;                 //Total number of structure management locks each channel has.
 
-    public static final long RESPAWN_INTERVAL = 10 * 1000;	//10 seconds, 10000.
+    public static final long RESPAWN_INTERVAL = 10 * 500;	//10 seconds, 10000.
     public static final long PURGING_INTERVAL = 5 * 60 * 1000;
     public static final long RANKING_INTERVAL = 60 * 60 * 1000;	//60 minutes, 3600000.
     public static final long  COUPON_INTERVAL = 60 * 60 * 1000;	//60 minutes, 3600000.
