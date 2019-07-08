@@ -37,6 +37,8 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.slf4j:slf4j-jdk14:1.7.5'
     compile 'mysql:mysql-connector-java:5.1.37'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }
 
 sourceSets {
@@ -45,10 +47,6 @@ sourceSets {
             srcDir 'src'
         }
     }
-}
-
-tasks.withType(JavaCompile) {
-    options.bootClasspath = "$JDK7_HOME/jre/lib/rt.jar;$JDK7_HOME/jre/lib/jce.jar"
 }
 
 task copyJarToDist(type: Copy) {
@@ -62,4 +60,15 @@ task buildAndCopy {
 
     build.mustRunAfter clean
     finalizedBy copyJarToDist
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'net.server.Server'
+        )
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

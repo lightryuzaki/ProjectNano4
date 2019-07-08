@@ -33,6 +33,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import constants.ServerConstants;
+import net.server.Server;
 import tools.FilePrinter;
 
 /**
@@ -68,7 +69,7 @@ public abstract class AbstractScriptManager {
                 c.setScriptEngine(path, engine);
             }
             try (FileReader fr = new FileReader(scriptFile)) {
-            	if (ServerConstants.JAVA_8){
+                if (Server.getInstance().ServerConfig.getJava8()){
             		engine.eval("load('nashorn:mozilla_compat.js');" + System.lineSeparator());
             	}
                 engine.eval(fr);

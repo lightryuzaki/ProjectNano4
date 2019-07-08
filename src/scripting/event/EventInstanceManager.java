@@ -24,6 +24,8 @@ package scripting.event;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import net.server.Server;
 import tools.Pair;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -567,7 +569,7 @@ public class EventInstanceManager {
                 try {
                         int inc;
                         
-                        if (ServerConstants.JAVA_8) {
+                        if (Server.getInstance().ServerConfig.getJava8()) {
                                 inc = (int)em.getIv().invokeFunction("monsterValue", EventInstanceManager.this, mob.getId());
                         } else {
                                 inc = ((Double) em.getIv().invokeFunction("monsterValue", EventInstanceManager.this, mob.getId())).intValue();
@@ -907,7 +909,7 @@ public class EventInstanceManager {
         
         private List<Integer> convertToIntegerArray(List<Double> list) {
             List<Integer> intList;
-            if(ServerConstants.JAVA_8)
+            if(Server.getInstance().ServerConfig.getJava8())
                  intList=new ArrayList<Integer> (new ArrayList(java.util.Arrays.asList(list.toArray())));
             else
             {

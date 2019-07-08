@@ -147,7 +147,7 @@ public final class Channel {
             eventSM = new EventScriptManager(this, getEvents());
             port = 7575 + this.channel - 1;
             port += (world * 100);
-            ip = ServerConstants.HOST + ":" + port;
+            ip = Server.getInstance().ServerConfig.getHostname() + ":" + port;
             IoBuffer.setUseDirectBuffer(false);
             IoBuffer.setAllocator(new SimpleBufferAllocator());
             acceptor = new NioSocketAcceptor();

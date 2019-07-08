@@ -7,10 +7,6 @@ public class ServerConstants {
     //Thread Tracker Configuration
     public static final boolean USE_THREAD_TRACKER = false;      //[SEVERE] This deadlock auditing thing will bloat the memory as fast as the time frame one takes to lose track of a raindrop on a tempesting day. Only for debugging purposes.
 
-    //Database Configuration
-    public static String DB_URL = "localhost";
-    public static String DB_USER = "root";
-    public static String DB_PASS = "";
     public static final boolean DB_CONNECTION_POOL = true;      //Installs a connection pool to hub DB connections. Set false to default.
 
     //Server Version
@@ -293,29 +289,4 @@ public class ServerConstants {
 
     //Debug Variables
     public static int DEBUG_VALUES[] = new int[10];             // Field designed for packet testing purposes
-
-    //Properties
-    static {
-        Properties p = new Properties();
-        try {
-            p.load(new FileInputStream("configuration.ini"));
-
-            //Server Host
-            ServerConstants.HOST = p.getProperty("HOST");
-
-            //Sql Database
-            ServerConstants.DB_URL = p.getProperty("URL");
-            ServerConstants.DB_USER = p.getProperty("DB_USER");
-            ServerConstants.DB_PASS = p.getProperty("DB_PASS");
-
-            //java8 And Shutdownhook
-            ServerConstants.JAVA_8 = p.getProperty("JAVA8").equalsIgnoreCase("TRUE");
-            ServerConstants.SHUTDOWNHOOK = p.getProperty("SHUTDOWNHOOK").equalsIgnoreCase("true");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Failed to load configuration.ini.");
-            System.exit(0);
-        }
-    }
 }

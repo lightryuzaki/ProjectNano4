@@ -46,6 +46,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
+import config.ConfigLoader;
+import config.ServerConfig;
 import net.server.audit.ThreadTracker;
 import net.server.audit.locks.MonitoredLockType;
 import net.server.audit.locks.MonitoredReentrantReadWriteLock;
@@ -151,6 +153,25 @@ public class Server {
     private boolean availableDeveloperRoom = false;
     private boolean online = false;
     public static long uptime = System.currentTimeMillis();
+
+    public ServerConfig ServerConfig = null;
+    public ServerConfig.Database DatabaseConfig = null;
+
+    public ServerConfig getServerConfig() {
+        return ServerConfig;
+    }
+
+    public void setServerConfig(ServerConfig svrConfig) {
+        ServerConfig = svrConfig;
+    }
+
+    public ServerConfig.Database getDatabaseConfig() {
+        return DatabaseConfig;
+    }
+
+    public void setDatabaseConfig(ServerConfig.Database dbConfig) {
+        DatabaseConfig = dbConfig;
+    }
     
     public int getCurrentTimestamp() {
         return (int) (Server.getInstance().getCurrentTime() - Server.uptime);
@@ -870,8 +891,10 @@ public class Server {
         }
 
         System.out.println("ProjectNano v" + ServerConstants.VERSION + " starting up.\r\n");
-        
-        if(ServerConstants.SHUTDOWNHOOK)
+
+        ConfigLoader.LoadServerConfig();
+
+        if(Server.getInstance().ServerConfig.getShutdownHook())
             Runtime.getRuntime().addShutdownHook(new Thread(shutdown(false)));
         
         TimeZone.setDefault(TimeZone.getTimeZone(ServerConstants.TIMEZONE));
@@ -931,9 +954,9 @@ public class Server {
         CashItemFactory.getSpecialCashItems();
         System.out.println("Items loaded in " + ((System.currentTimeMillis() - timeToTake) / 1000.0) + " seconds");
         
-	timeToTake = System.currentTimeMillis();
-	MapleQuest.loadAllQuest();
-	System.out.println("Quest loaded in " + ((System.currentTimeMillis() - timeToTake) / 1000.0) + " seconds\r\n");
+	    timeToTake = System.currentTimeMillis();
+	    MapleQuest.loadAllQuest();
+	    System.out.println("Quest loaded in " + ((System.currentTimeMillis() - timeToTake) / 1000.0) + " seconds\r\n");
 	
         NewYearCardRecord.startPendingNewYearCardRequests();
         
@@ -958,17 +981,16 @@ public class Server {
         acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 30);
         acceptor.setHandler(new MapleServerHandler());
         try {
-            acceptor.bind(new InetSocketAddress(8484));
+            acceptor.bind(new InetSocketAddress(ServerConfig.getPort()));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
-        System.out.println("Listening on port 8484\r\n\r\n");
 
-        System.out.println("ProjectNano is now online.\r\n");
         online = true;
-        
         MapleSkillbookInformationProvider.getInstance();
+
+        System.out.println("Server is accepting connections on port: " + ServerConfig.getPort() + "\r\n");
+        System.out.println("ProjectNano is now online\r\n");
     }
 
     public static void main(String args[]) {
