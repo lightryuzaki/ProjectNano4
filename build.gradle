@@ -37,12 +37,18 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.slf4j:slf4j-jdk14:1.7.5'
     compile 'mysql:mysql-connector-java:5.1.37'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compile 'org.hibernate:hibernate-core:5.1.16.Final'
 }
 
 sourceSets {
     main {
         java {
             srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
         }
     }
 }

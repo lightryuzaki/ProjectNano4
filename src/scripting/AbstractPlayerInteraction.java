@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import client.Skill;
+import controller.BossentriesController;
 import net.server.Server;
 import net.server.channel.Channel;
 import net.server.guild.MapleGuild;
@@ -1107,5 +1108,17 @@ public class AbstractPlayerInteraction {
 
         public long getCurrentTime() {
                 return Server.getInstance().getCurrentTime();
-        }    
+        }
+
+        public int playerHasEntriesLeftForExpedition(MapleCharacter mapleCharacter, MapleExpeditionType mapleExpeditionType) {
+            return BossentriesController.getInstance().playerHasEntriesLeftForExpedition(mapleCharacter, mapleExpeditionType);
+        }
+
+        public int partyHasEntriesLeftForExpedition(List<MapleCharacter> mapleCharacterList, MapleExpeditionType mapleExpeditionType) {
+            return BossentriesController.getInstance().partyHasEntriesLeftForExpedition(mapleCharacterList, mapleExpeditionType);
+        }
+
+        public int decrementEntriesForParty(List<MapleCharacter> players, MapleExpeditionType mapleExpeditionType) {
+	        return BossentriesController.getInstance().decrementEntriesForParty(players, mapleExpeditionType);
+        }
 }

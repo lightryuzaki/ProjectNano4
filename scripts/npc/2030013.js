@@ -26,6 +26,7 @@
 importPackage(Packages.server.expeditions);
 importPackage(Packages.tools);
 importPackage(Packages.scripting.event);
+importPackage(Packages.constants);
 
 var status = 0;
 var expedition;
@@ -37,6 +38,7 @@ var expedName = "Zakum";
 var expedBoss = "Zakum";
 var expedMap = "Zakum's Altar";
 var expedItem = 4001017;
+var isBossLimitsEnabled = ServerConstants.DAILY_BOSS_LIMITS_ENABLED;
 
 var list = "What would you like to do?#b\r\n\r\n#L1#View current Expedition members#l\r\n#L2#Start the fight!#l\r\n#L3#Stop the expedition.#l";
 
@@ -63,6 +65,18 @@ function action(mode, type, selection) {
                 cm.sendOk("You do not meet the criteria to battle " + expedBoss + "!");
                 cm.dispose();
             } else if (expedition == null) { //Start an expedition
+                if (isBossLimitsEnabled) {
+                    var entryCheck = cm.partyHasEntriesLeftForExpedition(player.getPartyMembers(), exped);
+                    if (entryCheck === 1) {
+                        cm.sendOk("Sorry, I can't let you in. A member of your party is out of entries for today.");
+                        cm.dispose();
+                        return;
+                    } else if (entryCheck > 1) {
+                        cm.sendOk("That's strange... I can't access your boss entries. If the problem persists, contact my bosses, the GMs.");
+                        cm.dispose();
+                        return;
+                    }
+                }
                 cm.sendSimple("#e#b<Expedition: " + expedName + ">\r\n#k#n" + em.getProperty("party") + "\r\n\r\nWould you like to assemble a team to take on #r" + expedBoss + "#k?\r\n#b#L1#Lets get this going!#l\r\n\#L2#No, I think I'll wait a bit...#l");
                 status = 1;
             } else if (expedition.isLeader(player)) { //If you're the leader, manage the exped
@@ -73,6 +87,18 @@ function action(mode, type, selection) {
                     cm.sendOk("You have already registered for the expedition. Please wait for #r" + expedition.getLeader().getName() + "#k to begin it.");
                     cm.dispose();
                 } else { //If you aren't in it, you're going to get added
+                    if (isBossLimitsEnabled) {
+                        var entryCheck = cm.playerHasEntriesLeftForExpedition(player, exped);
+                        if (entryCheck === 1) {
+                            cm.sendOk("Sorry, I can't let you in. You have run out of entries for today.");
+                            cm.dispose();
+                            return;
+                        } else if (entryCheck > 1) {
+                            cm.sendOk("That's strange... I can't access your boss entries. If the problem persists, contact my bosses, the GMs.");
+                            cm.dispose();
+                            return;
+                        }
+                    }
                     cm.sendOk(expedition.addMember(cm.getPlayer()));
                     cm.dispose();
                 }
@@ -144,6 +170,15 @@ function action(mode, type, selection) {
                     cm.sendOk("You need at least " + min + " players registered in your expedition.");
                     cm.dispose();
                     return;
+                }
+
+                if (isBossLimitsEnabled) {
+                    var decrementCheck = cm.decrementEntriesForParty(expedition.getActiveMembers(), exped);
+                    if (decrementCheck > 0) {
+                        cm.sendOk("An error occurred. Please contact a GM.");
+                        cm.dispose();
+                        return;
+                    }
                 }
                 
                 cm.sendOk("The expedition will begin and you will now be escorted to the #b" + expedMap + "#k.");

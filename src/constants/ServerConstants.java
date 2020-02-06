@@ -291,6 +291,8 @@ public class ServerConstants {
     //Event End Timestamp
     public static final long EVENT_END_TIMESTAMP = 1428897600000L;
 
+    public static final boolean DAILY_BOSS_LIMITS_ENABLED = true;
+
     //Debug Variables
     public static int DEBUG_VALUES[] = new int[10];             // Field designed for packet testing purposes
 

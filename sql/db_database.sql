@@ -21448,6 +21448,21 @@ ALTER TABLE `dueyitems`
 ALTER TABLE `famelog`
   ADD CONSTRAINT `famelog_ibfk_1` FOREIGN KEY (`characterid`) REFERENCES `characters` (`id`) ON DELETE CASCADE;
 
+CREATE TABLE IF NOT EXISTS `bossentries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `characterid` int(11) unsigned NOT NULL,
+  `zakum` TINYINT unsigned NOT NULL DEFAULT 0,
+  `horntail` TINYINT unsigned NOT NULL DEFAULT 0,
+  `showaboss` TINYINT unsigned NOT NULL DEFAULT 0,
+  `papulatus` TINYINT unsigned NOT NULL DEFAULT 0,
+  `scarlion` TINYINT unsigned NOT NULL DEFAULT 0,
+  `pinkbean` TINYINT unsigned NOT NULL DEFAULT 0,
+  `chaos_zakum` TINYINT unsigned NOT NULL DEFAULT 0,
+  `chaos_horntail` TINYINT unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

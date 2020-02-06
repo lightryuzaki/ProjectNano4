@@ -48,6 +48,8 @@ public class GameConstants {
     public static int getPlayerBonusExpRate(int slot) {
         return(EXP_RATE_GAIN[slot]);
     }
+
+    public static int DAILY_ENTRIES_TO_ALL_BOSSES = 2;
     
     // used by the "goto" command for players
     public static final HashMap<String, Integer> GOTO_TOWNS = new HashMap<String, Integer>() {{
